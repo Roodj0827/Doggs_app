@@ -1,11 +1,5 @@
-// ============================================================
-// SCREEN - splash_screen.dart
-// Rôle : UI/UX - Écran de démarrage animé
-// ============================================================
-
 import 'package:flutter/material.dart';
-import '../utils/app_theme.dart';
-import 'home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,16 +31,17 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
+    // Navigation avec vérification de connexion
+    Future.delayed(const Duration(seconds: 3), () async {
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-          PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 600),
-            pageBuilder: (_, __, ___) => const HomeScreen(),
-            transitionsBuilder: (_, anim, __, child) =>
-                FadeTransition(opacity: anim, child: child),
-          ),
-        );
+        final prefs = await SharedPreferences.getInstance();
+        final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(
+            isLoggedIn ? '/home' : '/login',
+          );
+        }
       }
     });
   }
@@ -77,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // ─── Logo animé ───
+                // Logo animé
                 ScaleTransition(
                   scale: _scaleAnim,
                   child: Container(
@@ -95,13 +90,12 @@ class _SplashScreenState extends State<SplashScreen>
                       ],
                     ),
                     child: const Center(
-                      child: Text('🐕',
-                          style: TextStyle(fontSize: 60)),
+                      child: Text('🐕', style: TextStyle(fontSize: 60)),
                     ),
                   ),
                 ),
                 const SizedBox(height: 28),
-                // ─── Titre ───
+                // Titre
                 FadeTransition(
                   opacity: _fadeAnim,
                   child: const Column(
@@ -128,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ),
                 const SizedBox(height: 60),
-                // ─── Loader ───
+                // Loader
                 FadeTransition(
                   opacity: _fadeAnim,
                   child: Column(
