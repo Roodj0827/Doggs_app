@@ -89,15 +89,17 @@ class _DogListScreenState extends State<DogListScreen> {
     });
   }
 
-  Future<void> _toggleFavorite(DogBreed dog) async {
-    final newState = await _favoritesService.toggleFavorite(dog.id);
-    setState(() {
-      final idx = _allDogs.indexWhere((d) => d.id == dog.id);
-      if (idx != -1) _allDogs[idx] = _allDogs[idx].copyWith(isFavorite: newState);
-      final idx2 = _filteredDogs.indexWhere((d) => d.id == dog.id);
-      if (idx2 != -1) _filteredDogs[idx2] = _filteredDogs[idx2].copyWith(isFavorite: newState);
-    });
-  }
+ Future<void> _toggleFavorite(DogBreed dog) async {
+  print('🐕 DEBUG: Toggle favori pour ${dog.id}'); // ← AJOUTEZ
+  final newState = await _favoritesService.toggleFavorite(dog.id);
+  print('🐕 DEBUG: Nouveau state = $newState'); // ← AJOUTEZ
+  setState(() {
+    final idx = _allDogs.indexWhere((d) => d.id == dog.id);
+    if (idx != -1) _allDogs[idx] = _allDogs[idx].copyWith(isFavorite: newState);
+    final idx2 = _filteredDogs.indexWhere((d) => d.id == dog.id);
+    if (idx2 != -1) _filteredDogs[idx2] = _filteredDogs[idx2].copyWith(isFavorite: newState);
+  });
+}
 
   @override
   Widget build(BuildContext context) {

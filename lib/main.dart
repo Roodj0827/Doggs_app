@@ -11,10 +11,10 @@
 
 import 'package:flutter/material.dart';
 import 'utils/app_theme.dart';
+import 'screens/login_screen.dart'; 
 import 'screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/dog_list_screen.dart';
-import 'screens/dog_detail_screen.dart';
 import 'screens/adopt_screen.dart';
 import 'screens/care_tips_screen.dart';
 import 'screens/favorites_screen.dart';
@@ -33,15 +33,16 @@ class DogsApp extends StatelessWidget {
       title: 'DOGS App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
         '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
         '/dogs': (context) => const DogListScreen(),
         '/adopt': (context) => const AdoptScreen(),
         '/care': (context) => const CareTipsScreen(),
         '/favorites': (context) => const FavoritesScreen(),
-      },
+      }
     );
   }
 }
