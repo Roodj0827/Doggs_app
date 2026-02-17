@@ -42,7 +42,7 @@ class DogsApp extends StatelessWidget {
         '/adopt': (context) => const AdoptScreen(),
         '/care': (context) => const CareTipsScreen(),
         '/favorites': (context) => const FavoritesScreen(),
-      },
+      }
     );
   }
 }

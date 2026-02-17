@@ -42,20 +42,25 @@ class _FavoritesScreenState extends State<FavoritesScreen>
     _loadFavorites();
   }
 
-  Future<void> _loadFavorites() async {
-    setState(() => _isLoading = true);
-    try {
-      final all = await _apiService.buildDogListings();
-      final favIds = await _favoritesService.getFavoriteIds();
-      final favs = all
-          .where((d) => favIds.contains(d.id))
-          .map((d) => d.copyWith(isFavorite: true))
-          .toList();
-      if (mounted) setState(() { _favoriteDogs = favs; _isLoading = false; });
-    } catch (_) {
-      if (mounted) setState(() => _isLoading = false);
-    }
+ Future<void> _loadFavorites() async {
+  setState(() => _isLoading = true);
+  try {
+    final all = await _apiService.buildDogListings();
+    final favIds = await _favoritesService.getFavoriteIds();
+    
+    // ← NOUVEAU : Conversion en String pour comparaison
+    final favIdStrings = favIds.map((id) => id.toString()).toSet();
+    
+    final favs = all
+        .where((d) => favIdStrings.contains(d.id.toString()))  // ← MODIFIÉ
+        .map((d) => d.copyWith(isFavorite: true))
+        .toList();
+        
+    if (mounted) setState(() { _favoriteDogs = favs; _isLoading = false; });
+  } catch (_) {
+    if (mounted) setState(() => _isLoading = false);
   }
+}
 
   Future<void> _removeFavorite(DogBreed dog) async {
     await _favoritesService.removeFavorite(dog.id);
