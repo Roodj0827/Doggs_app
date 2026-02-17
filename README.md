@@ -13,6 +13,10 @@
 
 **DOGS App** - Adopt, Buy & Care for Dogs
 
+
+lien drive de ma video : https://drive.google.com/drive/folders/1C4xCtQKKqYl0WENEsH-ueZUp6TwE7Yo
+
+=======
 Application mobile Flutter pour l'adoption et les soins de chiens.
 
 ---
@@ -221,5 +225,11 @@ GitHub : https://github.com/onefire-esih/dogs-app
 ---
 
 https://drive.google.com/drive/folders/1C4xCtQKKqYl0WENEsH-ueZUp6TwE7Yow
+<<<<<<< HEAD
 y
 *Document rédigé dans le cadre du projet final de développement mobile - ESIH 2026*
+=======
+
+*Document rédigé dans le cadre du projet final de développement mobile - ESIH 2026*
+>>>>>>> 5cbd89b7a2cdad94a0775d9c13732a8525831b2f
+>>>>>>> 4a3fcf31c79da4a7a7ed036f95cdade82f2c680d
